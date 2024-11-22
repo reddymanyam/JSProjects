@@ -35,6 +35,14 @@
         <h1 class="message">Third heading</h1>
         <h1 class="message">Fourth heading</h1>
     </div>
+    
+    <!--element by queryselector and queryselectorall-->
+    <div>
+        <h1 class="message">first heading</h1>
+        <h1 class="message">second heading</h1>
+        <h1 class="message">Third heading</h1>
+        <h1 class="message">Fourth heading</h1>
+    </div>
 
     <script>
         let msg = document.getElementById("message");
@@ -50,8 +58,15 @@
         console.log(headings);
 
         let cont = document.getElementById("container");
-        let msgg = cont.getElementsByClassName("message");
-        console.log(msg)
+        let msg1 = cont.getElementsByClassName("message");
+        console.log(msg1)
+        
+        let msg2 = document.querySelector(".message");
+        console.log(msg2);
+
+        let msg3 = document.querySelectorAll(".message");
+        console.log(msg3);
+        
     </script>
 </body>
 </html>
