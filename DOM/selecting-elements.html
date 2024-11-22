@@ -44,6 +44,13 @@
         <h1 class="message">Fourth heading</h1>
     </div>
 
+    <!--parent elements, child elements-->
+    <div class="title">
+        <p>Welcome to GreatStack 1</p>
+        <p id="nxt_Sibling">Welcome to GreatStack 2</p>
+        <p>Welcome to GreatStack 3</p>
+        <p>Welcome to GreatStack 4</p>
+    </div>
     <script>
         let msg = document.getElementById("message");
         console.log(msg);
@@ -66,7 +73,18 @@
 
         let msg3 = document.querySelectorAll(".message");
         console.log(msg3);
-        
+
+        let txt = document.querySelector("h1");
+        console.log(txt.parentNode)
+
+        let parent = document.querySelector(".title");
+        console.log(parent.firstElementChild)
+        console.log(parent.lastElementChild)
+        console.log(parent.childNodes)
+
+        let nxtSibling = document.getElementById("nxt_Sibling");
+        console.log(nxtSibling.nextElementSibling)
+        console.log(nxtSibling.previousElementSibling)
     </script>
 </body>
 </html>
