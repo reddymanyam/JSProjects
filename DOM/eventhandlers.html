@@ -9,9 +9,15 @@
     <button id="button">onclick</button>
     <script>
         let btn = document.getElementById("button");
-        btn.addEventListener("click",function(){
+        function displayMsg(){
             console.log("button clicked");
-        })
+        }
+        
+        // btn.addEventListener("click",function(){
+        //     console.log("button clicked");
+        // })
+
+        btn.addEventListener("click",displayMsg);
     </script>
 </body>
 </html>
