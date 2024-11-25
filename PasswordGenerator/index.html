@@ -13,7 +13,7 @@
         <h1>Generate a <br><span>Random Password</span></h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password" />
-            <img src="./images/copy.png" />
+            <img src="./images/copy.png" id="copybtn"/>
         </div>
         <button id="btn"><img src="images/generate.png"> Generate Password</button>
     </div>
@@ -26,6 +26,7 @@
        const lowerCase ="abcdefghijklmnopqrstuvwxyz";
        const numbers ="0123456789";
        const symbols = "!@#$%^&*()_+?><,.';{}[?]";
+       const allchar = upperCase + lowerCase + numbers + symbols;
 
        function createPassword(){
         let password = "";
@@ -34,13 +35,25 @@
         password += numbers[Math.floor(Math.random() * numbers.length)];
         password += symbols[Math.floor(Math.random() * symbols.length)];
 
-       }
-       const btn = document.getElementById("btn");
-       btn.addEventListener("click",generatePassword())
-       
-       function generatePassword(){
+        while(length > password.length){
+            password += allchar[Math.floor(Math.random()* allchar.length)];
+        }
+        
+        passwordBox.value = password;
+        console.log(passwordBox);
+        console.log("button clicked");
        }
 
+       const btn = document.getElementById("btn");
+       btn.addEventListener("click",createPassword)
+
+       function copyPassword(){
+        passwordBox.select();
+        document.execCommand("copy");
+       }
+      
+       const copyBtn = document.getElementById("copybtn");
+       copyBtn.addEventListener("click",copyPassword);
     </script>
 </body>
 
