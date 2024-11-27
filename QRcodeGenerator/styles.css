@@ -49,3 +49,25 @@ body{
     margin: 20px 0;
     font-weight: 500;
 }
+
+#imgBox{
+    width: 200px;
+    border-radius: 5px;
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: max-height 2s;
+}
+
+#imgBox img{
+    width: 100%;
+    padding: 10%;
+}
+
+#imgBox.show-img{
+    max-height: 300px;
+    margin: 10px auto;
+    border: 1px solid #d1d1d1;
+}
