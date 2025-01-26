@@ -60,11 +60,14 @@ getData();
 const fetchData = async () => {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-        const data = response.json()
+        const data = await response.json()
         console.log(`the  data is ${data.title}`)
     }
     catch (err) {
         console.log(`http:// the error is ${err}`)
+    }
+    finally{
+        console.log("API call completed.");
     }
 }
 fetchData();
