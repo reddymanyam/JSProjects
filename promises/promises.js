@@ -25,9 +25,9 @@ let promise = new Promise((resolve, reject) => {
     let a = 1 + 1;
     if (a == 2) {
         resolve('Success');
-    } else {   
+    } else {
         reject('Failed');
-    }                
+    }
 });
 
 promise.then((message) => {
@@ -38,18 +38,33 @@ promise.then((message) => {
 
 //....................example for promise real world API'S ----------------------
 const getData = () => {
-  
-    fetch("https://jsonplaceholder.typicode.com/posts/1").then((response) =>{
-        
-        if(!response.ok){
-            throw new error(`https:// getting error ${response.status}`)
-        }
-        const data = response.json()
-        console.log(data)
-        return data.title;
 
-    }).catch((error)=>{
-       alert(`https://www.getting error is ${error.message}`)
-    })
+    fetch("https://jsonplaceholder.typicode.com/posts/1").then((response) => {
+
+        if (!response.ok) {
+            throw new Error(`https:// getting error ${response.status}`)
+        }
+        return response.json();
+
+    }).then((data) => {
+        console.log(`the response data is ${data.title}`);
+    }).catch((error) => {
+        alert(`https://www.getting error is ${error.message}`)
+    }) .finally(() => {
+        console.log("API call completed.");
+      });
 }
 getData();
+
+//--------------------same code re written in the asyn and await-----------------------
+const fetchData = async () => {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+        const data = response.json()
+        console.log(`the  data is ${data.title}`)
+    }
+    catch (err) {
+        console.log(`http:// the error is ${err}`)
+    }
+}
+fetchData();
