@@ -78,7 +78,7 @@ const fetchData = async () => {
 fetchData();
 
 //--------------------- same code re-written with axios--------------------
-// In axios we are not able to convert it into  data = response.json, this plugin only converts it directly
+// In axios we are not able to convert it into  data = response.json, this dependency only converts it directly
 
 const fetchDaata = async() =>{
        
@@ -95,3 +95,77 @@ const fetchDaata = async() =>{
 
 }
 fetchDaata();
+
+//--------------------------------------PROMISE CHAINING-----------------------------------------
+// promise chainig is useful, when the next api is depending on the previous api
+// when the next api will not depends on the previous api, then it will cause waste of time , the next apis to wait for before api call.
+// In this case for parallel execution of api calls, we use promise.all and promise.allsettled
+
+const fetchPostsSequentially = () => {
+      fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch post 1");
+          }
+          return response.json(); // Parse JSON response for post 1
+        })
+        .then((post1) => {
+          console.log("Post 1:", post1);
+          // Fetch post 2 after post 1 is fetched
+          return fetch("https://jsonplaceholder.typicode.com/posts/2");
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch post 2");
+          }
+          return response.json(); // Parse JSON response for post 2
+        })
+        .then((post2) => {
+          console.log("Post 2:", post2);
+          // Fetch post 3 after post 2 is fetched
+          return fetch("https://jsonplaceholder.typicode.com/posts/3");
+        })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch post 3");
+          }
+          return response.json(); // Parse JSON response for post 3
+        })
+        .then((post3) => {
+          console.log("Post 3:", post3);
+        })
+        .catch((error) => {
+          // Handle any error that occurs in the chain
+          console.error("Error in promise chain:", error.message);
+        })
+        .finally(() => {
+          console.log("All API calls completed (or error handled).");
+        });
+    };
+    
+    fetchPostsSequentially();
+
+    //---------promise chaining implemenatation with async and await......................
+    const fetchPostsSequential = async () => {
+      try {
+        const response1 = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+        const post1 = await response1.json();
+        console.log("Post 1:", post1);
+    
+        const response2 = await fetch("https://jsonplaceholder.typicode.com/posts/2");
+        const post2 = await response2.json();
+        console.log("Post 2:", post2);
+    
+        const response3 = await fetch("https://jsonplaceholder.typicode.com/posts/3");
+        const post3 = await response3.json();
+        console.log("Post 3:", post3);
+      } catch (error) {
+        console.error("Error in fetching posts:", error);
+      }
+    };
+    
+    fetchPostsSequential();
+    
+
+    //--------------------------------------PROMISE.ALL.....................................
+    
