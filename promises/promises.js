@@ -56,10 +56,15 @@ const getData = () => {
 }
 getData();
 
-//--------------------same code re written in the asyn and await-----------------------
+//--------------------same code re-written in the asyn and await-----------------------
+// By using async and await , it is easy to write , understand and maintainable the code , thats why we are using async and await instead of promises.
+//Async/await eliminates nested .then() calls, making it ideal for larger-scale asynchronous logic.
 const fetchData = async () => {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+        if(!response.ok){
+            throw new Error(`HTTP error! Status:${response.status}`)
+        }
         const data = await response.json()
         console.log(`the  data is ${data.title}`)
     }
@@ -71,3 +76,22 @@ const fetchData = async () => {
     }
 }
 fetchData();
+
+//--------------------- same code re-written with axios--------------------
+// In axios we are not able to convert it into  data = response.json, this plugin only converts it directly
+
+const fetchDaata = async() =>{
+       
+      try{
+            const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
+            console.log("The response of this particular---->",response.data.title)
+      }
+      catch(err){
+            console.log(`http://the err is: ${err}`)
+      }
+      finally{
+            console.log("API call is completed")
+      }
+
+}
+fetchDaata();
