@@ -168,4 +168,58 @@ const fetchPostsSequentially = () => {
     
 
     //--------------------------------------PROMISE.ALL.....................................
+    const fetchMultipleData = async () => {
+      const urls = [
+        "https://jsonplaceholder.typicode.com/posts/1",
+        "https://jsonplaceholder.typicode.com/posts/2",
+        "https://jsonplaceholder.typicode.com/posts/3",
+      ];
     
+      try {
+        const responses = await Promise.all(urls.map((url) => fetch(url)));
+        const data = await Promise.all(responses.map((response) => response.json()));
+        console.log("Fetched data:", data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+    fetchMultipleData();
+
+   //---------------------------------------PROMISE.ALL by using async and await------------------------------------
+   const fetchDatas = async () => {
+    const response1 = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+    const data1 = await response1.json();
+  
+    const response2 = await fetch("https://jsonplaceholder.typicode.com/posts/2");
+    const data2 = await response2.json();
+  
+    console.log(data1, data2);
+  };
+  fetchDatas();       //but it is inefficient, so for the parallel execution, go with promise.all only OR with axios
+
+  //-----------------------------------------PROMISE.ALL with AXIOS------------------------
+ 
+  const fetchParallel = async () => {
+    try {
+      const urls = [
+        "https://jsonplaceholder.typicode.com/posts/1",
+        "https://jsonplaceholder.typicode.com/posts/2",
+        "https://jsonplaceholder.typicode.com/posts/3",
+      ];
+  
+      const responses = await Promise.all(urls.map((url) => axios.get(url)));
+      const data = responses.map((response) => response.data);
+      console.log("Fetched Data:", data);
+    } catch (err) {
+      console.error("Error:", err.message);
+    }
+  };
+  fetchParallel();
+
+  
+  /* 
+  - There is an issue with promise.all
+  - The issue is when any one of the api call is not working, then it will stop execution of the remaining calls and will not display the error which api is not working
+  
+  - To overcome this we use promise.allsettled 
+  */
