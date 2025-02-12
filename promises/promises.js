@@ -62,7 +62,7 @@ mypromise.then((message) => console.log(message))
   .catch((error) => console.log(error));
 
 //-------------------------------------------------------------------------------------------
-const data = [{"username":"reddy", "password":"12345"}]
+const data = [{"username":"reddy", "password":"12345", "phone":"1234567890", "email":"qwerty@1234"}]
 
 function isAuthenticatedPromise(username,password) {
   return new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ function isAuthenticatedPromise(username,password) {
       setTimeout(() => {
           const isUser = data.find((user) => user.username === username && user.password === password);
           if (isUser) {
-              resolve("user found");
+              resolve(isUser);
           } else {
               reject("user not found");
           }
@@ -78,10 +78,33 @@ function isAuthenticatedPromise(username,password) {
   })
 }
 
+function isAuthenticatedPromise(username, password) {
+  return new Promise((resolve, reject) => {
 
-isAuthenticatedPromise("reddy","12345").then((message) => {
-  console.log(message);
-}).catch((err) => console.log(err));
+      setTimeout(() => {
+          const isUser = data.find((user) => user.username === username && user.password === password);
+          if (isUser) {
+              resolve(isUser);
+          } else {
+              reject("user not found");
+          }
+      }, 2000)
+  })
+}
+function handleUserData(userData) {
+  console.log("User data received:", userData);
+  return userData; 
+}
+
+isAuthenticatedPromise("reddy","12345").then(handleUserData).catch((err) => console.log(err));
+
+
+// isAuthenticatedPromise("reddy","12345").then((message) => {
+//   console.log(message);
+// }).then(() =>{
+//   console.log(isUser);
+// })
+// .catch((err) => console.log(err));
 
 //....................example for promise real world API'S ----------------------
 const getData = () => {
