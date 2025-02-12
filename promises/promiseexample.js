@@ -14,7 +14,7 @@ function isAuthenticated(username, password) {
 }
 isAuthenticated("reddy", "1234");
 
-//.............same thing using promises now--------------
+//--------------------same thing using promises now--------------
 
 function isAuthenticatedPromise(username, password) {
     return new Promise((resolve, reject) => {
@@ -29,12 +29,36 @@ function isAuthenticatedPromise(username, password) {
         }, 2000)
     })
 }
-function handleUserData(userData) {
-    console.log("User data received:", userData);
-    return userData; 
-  }
+
 
 isAuthenticatedPromise("reddy","1234").then(handleUserData).catch((err) => console.log(err)).then()
 
 
+//-----------------------------------------------------------
+const users = [{username:"reddy", password:"12345", details:[{name:"reddy", designation:"software", skills:"react"}]},
+               {username:"rakesh", password:"123456", details:[{name:"rakesh", designation:"software", skills:"react"}]}]
 
+function authenticateUser(username, password){
+    return new Promise ((resolve, reject) =>{
+        setTimeout(()=>{
+        let isUser = users.find((user)=> user.username === username && user.password === password);
+        if(isUser){
+            resolve(isUser.details);
+        }else{
+            reject("user is not found...!");
+        }
+        },1000)
+    })
+} 
+
+function getUserdetails(userDetails){
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+           resolve(`user details are: name:${userDetails.name}, designation:${userDetails.designation}, skills:${userDetails.skills}`)
+        },1000)
+    })
+}
+
+authenticateUser("reddy", "12345").then((userDetails)=> getUserdetails(userDetails))
+                                 .then(details => console.log(details))
+                                 .catch(err => console.log(err.message))
