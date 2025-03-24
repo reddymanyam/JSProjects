@@ -147,6 +147,7 @@ body {
     border: 1px solid #cce7d0;
     border-radius: 4px;
     margin: 15px 0;
+    cursor: pointer;
 }
 
 #feature .fe-box:hover {
@@ -185,4 +186,28 @@ body {
 
 #feature .fe-box:nth-child(6) h6 {
     background-color: #fff2e5;
+}
+
+#product1{
+    text-align: center;
+}
+
+#product1 .pro{
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid #cce7d0;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
+    margin: 15px 0;
+    transition: 0.2s ease;
+}
+#product1 .pro:hover{
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
+
+}
+#product1 .pro img{
+    width: 100%;
+    border-radius: 20px;
 }
