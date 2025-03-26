@@ -1,5 +1,5 @@
-const data = [{ "username": "reddy", "password": "1234" },
-{ "username": "raju", "password": "2345" }];
+const data = [{ "username": "reddy", "password": "1234", "phone":"1234567890", "email":"qwerty@1234" },
+{ "username": "ramu", "password": "2345" }];
 
 function isAuthenticated(username, password) {
 
@@ -16,13 +16,13 @@ isAuthenticated("reddy", "1234");
 
 //--------------------same thing using promises now--------------
 
-function isAuthenticatedPromise() {
+function isAuthenticatedPromise(username, password) {
     return new Promise((resolve, reject) => {
 
         setTimeout(() => {
             const isUser = data.find((user) => user.username === username && user.password === password);
             if (isUser) {
-                resolve("user found");
+                resolve(isUser);
             } else {
                 reject("user not found");
             }
@@ -30,9 +30,9 @@ function isAuthenticatedPromise() {
     })
 }
 
-isAuthenticatedPromise("reddy","1234").then((message) => {
-    console.log(message);
-}).catch((err) => console.log(err));
+
+isAuthenticatedPromise("reddy","1234").then(handleUserData).catch((err) => console.log(err)).then()
+
 
 //-----------------------------------------------------------
 const users = [{username:"reddy", password:"12345", details:[{name:"reddy", designation:"software", skills:"react"}]},

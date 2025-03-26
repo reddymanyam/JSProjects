@@ -1,0 +1,21 @@
+.icon-container {
+    display: flex;  
+    gap: 5px;     
+    width: 20px;
+    height: 20px;
+    background-image: url('https://w3bits.com/files/img/sprite.png');
+    background-repeat: no-repeat;
+}
+
+.first {
+    background-position: 0 0;
+}
+.second {
+    background-position: -20px 0;
+}
+.third {
+    background-position: -40px 0;
+}
+.forth {
+    background-position: -60px 0;
+}
